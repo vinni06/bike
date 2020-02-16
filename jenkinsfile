@@ -40,7 +40,7 @@ node {
   
       
    stage('Docker-Stage-Deployment') {
-   sh label: '', script: 'docker-compose up -d --build'
+   sh label: '', script: '../docker/docker-compose up -d --build'
   }
  
   stage('Geting Ready For Ansible') {
