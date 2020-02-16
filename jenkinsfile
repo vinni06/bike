@@ -4,7 +4,7 @@ node {
 
      
   stage('Git-Checkout') {
-   git 'https://github.com/kalyankkc/Bikes-Brands.git'
+   git 'https://github.com/kalyankkc/code_repo.git'
   }
     
  def project_path="Bikes/"
