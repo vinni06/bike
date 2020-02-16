@@ -52,6 +52,15 @@ node {
 }
    def docker_path="docker/"
  dir(docker_path) {
+    stage('Download from Jfrog'){
+        def server= Artifactory.server 'Jfrog'
+            def downloadSpec = """{
+                "files": [{
+                "pattern": "project-warfile/*.war",
+                "target": "jfrogdownload/" }]
+            }"""
+        server.download(downloadSpec)
+   }
    stage('Docker-Stage-Deployment') {
    sh label: '', script: 'docker-compose up -d --build'
   }
@@ -69,7 +78,7 @@ node {
             def downloadSpec = """{
                 "files": [{
                 "pattern": "project-warfile/*.war",
-                "target": "jfrogdownload/" }]
+                "target": "/root/.jenkins/workspace/deployment_with_different_repos/docker/jfrogdownload/" }]
             }"""
         server.download(downloadSpec)
    }
