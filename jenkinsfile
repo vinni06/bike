@@ -4,10 +4,11 @@ node {
 
      
   stage('Git-Checkout') {
-   git 'https://github.com/kalyankkc/code_repo.git'
+  sh 'rm -rf code_repo'
+   git clone 'https://github.com/kalyankkc/code_repo.git'
   }
     
- def project_path="Bikes/"
+ def project_path="code_repo/Bikes/"
  
  dir(project_path) {
     
@@ -50,7 +51,7 @@ node {
   
   
 }
-   def docker_path="docker/"
+   def docker_path="code_repo/docker/"
  dir(docker_path) {
     stage('Download from Jfrog'){
         def server= Artifactory.server 'Jfrog'
@@ -67,11 +68,12 @@ node {
 }
   
     stage('Ansible-Checkout') {
+    sh 'rm -rf ansible_repo'
    git 'https://github.com/kalyankkc/ansible_repo.git'
   }
   
   
-   def ansible_path="ansible/"
+   def ansible_path="ansible_repo/ansible/"
   dir(ansible_path) {
        stage('Download from Jfrog'){
         def server= Artifactory.server 'Jfrog'
@@ -93,10 +95,11 @@ node {
    
  
    stage('Terraform-Checkout') {
+   sh 'rm -rf terraform_repo'
    git 'https://github.com/kalyankkc/terraform_repo.git'
   }
 
-def terraform_path="terraform/"
+def terraform_path="terraform_repo/terraform/"
 dir(terraform_path) {
    stage('Prod Deployment on AWS'){
    sh label: 'terraform', script: '/bin/terraform  init'
