@@ -50,8 +50,8 @@ node {
   
   
 }
-   def project_path="docker/"
- dir(project_path) {
+   def docker_path="docker/"
+ dir(docker_path) {
    stage('Docker-Stage-Deployment') {
    sh label: '', script: 'docker-compose up -d --build'
   }
@@ -62,8 +62,8 @@ node {
   }
   
   
-   def project_path="ansible/"
-  dir(project_path) {
+   def ansible_path="ansible/"
+  dir(ansible_path) {
        stage('Download from Jfrog'){
         def server= Artifactory.server 'Jfrog'
             def downloadSpec = """{
@@ -87,8 +87,8 @@ node {
    git 'https://github.com/kalyankkc/terraform_repo.git'
   }
 
-def project_terra="terraform/"
-dir(project_terra) {
+def terraform_path="terraform/"
+dir(terraform_path) {
    stage('Prod Deployment on AWS'){
    sh label: 'terraform', script: '/bin/terraform  init'
    sh label: 'terraform', script: '/bin/terraform  apply -input=false -auto-approve'
