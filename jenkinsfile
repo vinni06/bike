@@ -69,7 +69,7 @@ node {
   
     stage('Ansible-Checkout') {
     sh 'rm -rf ansible_repo'
-   git 'https://github.com/kalyankkc/ansible_repo.git'
+   sh 'git clone https://github.com/kalyankkc/ansible_repo.git'
   }
   
   
@@ -96,7 +96,7 @@ node {
  
    stage('Terraform-Checkout') {
    sh 'rm -rf terraform_repo'
-   git 'https://github.com/kalyankkc/terraform_repo.git'
+   sh 'git https://github.com/kalyankkc/terraform_repo.git'
   }
 
 def terraform_path="terraform_repo/terraform/"
