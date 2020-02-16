@@ -39,11 +39,11 @@ node {
   }  
   
       stage('Jfrog Artifacory'){
-        def server= Artifactory.server 'jfrog'
+        def server= Artifactory.server 'Jfrog'
             def uploadSpec= """{
                 "files": [{
                 "pattern": "target/*.war",
-                "target": "ArtifactRepository1"}]
+                "target": "libs-release-local"}]
             }"""
             server.upload(uploadSpec)
     }
@@ -65,10 +65,10 @@ node {
    def project_path="ansible/"
   dir(project_path) {
        stage('Download from Jfrog'){
-        def server= Artifactory.server 'jfrog'
+        def server= Artifactory.server 'Jfrog'
             def downloadSpec = """{
                 "files": [{
-                "pattern": "ArtifactRepository1/*.war",
+                "pattern": "libs-release-local/*.war",
                 "target": "jfrogdownload/" }]
             }"""
         server.download(downloadSpec)
