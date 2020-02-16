@@ -37,6 +37,18 @@ node {
     stage('Archive-Artifacts') {
    archiveArtifacts 'target/*.war'
   }  
+  
+      stage('Jfrog Artifacory'){
+        def server= Artifactory.server 'jfrog'
+            def uploadSpec= """{
+                "files": [{
+                "pattern": "target/*.war",
+                "target": "ArtifactRepository1"}]
+            }"""
+            server.upload(uploadSpec)
+    }
+  
+  
 }
    def project_path="docker/"
  dir(project_path) {
@@ -52,6 +64,18 @@ node {
   
    def project_path="ansible/"
   dir(project_path) {
+       stage('Download from Jfrog'){
+        def server= Artifactory.server 'jfrog'
+            def downloadSpec = """{
+                "files": [{
+                "pattern": "ArtifactRepository1/*.war",
+                "target": "jfrogdownload/" }]
+            }"""
+        server.download(downloadSpec)
+   }
+  
+  
+  
   stage('Geting Ready For Ansible') {
   sh label: 'Docker', script: 'cp -rf target/*.war ansible/templates/'
   sh label: 'Jenkins', script: "echo '<h1> TASK BUILD ID: ${env.BUILD_DISPLAY_NAME}</h1>' > ansible/templates/apps/index.html"
