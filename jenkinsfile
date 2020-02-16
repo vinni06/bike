@@ -78,7 +78,7 @@ node {
             def downloadSpec = """{
                 "files": [{
                 "pattern": "project-warfile/*.war",
-                "target": "/root/.jenkins/workspace/deployment_with_different_repos/docker/jfrogdownload/" }]
+                "target": "jfrogdownload/" }]
             }"""
         server.download(downloadSpec)
    }
@@ -86,7 +86,7 @@ node {
   
   
   stage('Geting Ready For Ansible') {
-  sh label: 'Docker', script: 'cp -rf target/*.war ansible/templates/'
+  sh label: 'Docker', script: 'cp -rf jfrogdownload/*.war ansible/templates/'
   sh label: 'Jenkins', script: "echo '<h1> TASK BUILD ID: ${env.BUILD_DISPLAY_NAME}</h1>' > ansible/templates/apps/index.html"
   }  
 }
