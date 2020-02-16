@@ -36,19 +36,30 @@ node {
   
     stage('Archive-Artifacts') {
    archiveArtifacts 'target/*.war'
+  }  
+}
+   def project_path="docker/"
+ dir(project_path) {
+   stage('Docker-Stage-Deployment') {
+   sh label: '', script: 'docker-compose up -d --build'
+  }
+}
+  
+    stage('Ansible-Checkout') {
+   git 'https://github.com/kalyankkc/ansible_repo.git'
   }
   
-      
-   stage('Docker-Stage-Deployment') {
-   sh label: '', script: '../docker/docker-compose up -d --build'
-  }
- 
+  dir(project_path) {
   stage('Geting Ready For Ansible') {
-  sh label: 'Docker', script: 'cp -rf target/*.war ../ansible/templates/'
-  sh label: 'Jenkins', script: "echo '<h1> TASK BUILD ID: ${env.BUILD_DISPLAY_NAME}</h1>' > ../ansible/templates/apps/index.html"
-}  
+  sh label: 'Docker', script: 'cp -rf target/*.war ansible/templates/'
+  sh label: 'Jenkins', script: "echo '<h1> TASK BUILD ID: ${env.BUILD_DISPLAY_NAME}</h1>' > ansible/templates/apps/index.html"
+  }  
+}
    
- }
+ 
+   stage('Ansible-Checkout') {
+   git 'https://github.com/kalyankkc/terraform_repo.git'
+  }
 
 def project_terra="terraform/"
 dir(project_terra) {
