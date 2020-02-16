@@ -43,7 +43,7 @@ node {
             def uploadSpec= """{
                 "files": [{
                 "pattern": "target/*.war",
-                "target": "libs-release-local"}]
+                "target": "project-warfile"}]
             }"""
             server.upload(uploadSpec)
     }
@@ -68,7 +68,7 @@ node {
         def server= Artifactory.server 'Jfrog'
             def downloadSpec = """{
                 "files": [{
-                "pattern": "libs-release-local/*.war",
+                "pattern": "project-warfile/*.war",
                 "target": "jfrogdownload/" }]
             }"""
         server.download(downloadSpec)
