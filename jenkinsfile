@@ -1,10 +1,10 @@
 node {
 
 
-environment {
+/*environment {
     registry = "kalyankkc/capstoneproject"
     registryCredential = 'kalyan-dockerhub'
-  }
+  }*/
 
  try  {
  notify('Job Started') 
@@ -76,12 +76,12 @@ environment {
    sh label: '', script: 'docker-compose up -d --build'
   }
   
-   stage('Pushing DockerImage to DockerHub') {
+  /* stage('Pushing DockerImage to DockerHub') {
 	  docker.withRegistry('', 'kalyan-dockerhub' ) {
 		    sh label: '', script: 'docker push kalyankkc/capstoneproject:$BUILD_NUMBER'
 		  }
    
-  }
+  }*/
   
   
   
@@ -89,7 +89,7 @@ environment {
   
     stage('Ansible-Checkout') {
     sh 'rm -rf ansible_repo'
-   sh 'git clone https://github.com/kalyankkc/ansible_repo.git'
+   sh 'git clone https://github.com/vinni06/ansible-repo.git'
   }
   
   
@@ -116,7 +116,7 @@ environment {
  
    stage('Terraform-Checkout') {
    sh 'rm -rf terraform_repo'
-   sh 'git clone https://github.com/kalyankkc/terraform_repo.git'
+   sh 'git clone https://github.com/vinni06/terraform-repo.git'
   }
 
 def terraform_path="terraform_repo/terraform/"
@@ -140,7 +140,7 @@ notify('Job Completed')
 
 def notify(status){
     emailext (
-	to: "kalyankkc118@.gmail.com",
+	to: "emmanenivineela6@.gmail.com",
 	subject: "${status}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
 	 body: """<p>${status}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
 	<p>Check console output at <a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a></p>""",
