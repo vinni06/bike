@@ -11,8 +11,8 @@ node {
 
      
   stage('Git-Checkout') {
-  sh 'rm -rf code_repo'
-  sh 'git clone https://github.com/vinni06/bike.git'
+ 
+  sh 'git https://github.com/vinni06/bike.git'
   }
     
  def project_path="bike/Bikes/"
