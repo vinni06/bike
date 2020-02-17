@@ -15,7 +15,7 @@ node {
   git 'https://github.com/vinni06/bike.git'
   }
     
- def project_path="bike/Bikes/"
+ def project_path="Bikes/"
  
  dir(project_path) {
     
