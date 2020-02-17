@@ -1,4 +1,11 @@
 node {
+
+
+environment {
+    registry = "kalyankkc/capstoneproject"
+    registryCredential = 'kalyan-dockerhub'
+  }
+
  try  {
  notify('Job Started') 
 
@@ -67,6 +74,13 @@ node {
    
    stage('Docker-Stage-Deployment') {
    sh label: '', script: 'docker-compose up -d --build'
+  }
+  
+   stage('Pushing DockerImage to DockerHub') {
+	  docker.withRegistry('', 'kalyan-dockerhub' ) {
+		    sh label: '', script: 'docker push kalyankkc/capstoneproject:$BUILD_NUMBER'
+		  }
+   
   }
   
   
