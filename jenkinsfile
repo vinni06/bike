@@ -54,7 +54,7 @@ node {
   
   
 }
-   def docker_path="bike/docker/"
+   def docker_path="docker/"
  dir(docker_path) {
     stage('Download from Jfrog'){
         def server= Artifactory.server 'Artifactory'
