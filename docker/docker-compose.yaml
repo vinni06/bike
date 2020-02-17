@@ -4,5 +4,7 @@ version: '2'
 services:
   bike-brands:
     build: . 
+    image: kalyankkc/capstoneproject:$BUILD_NUMBER
+    container_name: capstoneproject
     ports:
       - '8084:8080'
