@@ -79,7 +79,7 @@ node {
 }
   
     stage('Ansible-Checkout') {
-    sh 'rm -rf ansible_repo'
+    sh 'rm -rf ansible-repo'
    sh 'git clone https://github.com/vinni06/ansible-repo.git'
   }
   
@@ -106,7 +106,7 @@ node {
    
  
    stage('Terraform-Checkout') {
-   sh 'rm -rf terraform_repo'
+   sh 'rm -rf terraform-repo'
    sh 'git clone https://github.com/vinni06/terraform-repo.git'
   }
 
