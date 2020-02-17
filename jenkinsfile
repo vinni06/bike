@@ -33,7 +33,7 @@ node {
   
 
    stage('sonar') {
-        withSonarQubeEnv('sonarqube') {
+        withSonarQubeEnv('SonarQube') {
             sh "mvn sonar:sonar"
         }
     }
@@ -47,7 +47,7 @@ node {
   }  
   
       stage('Jfrog Artifacory'){
-        def server= Artifactory.server 'Jfrog'
+        def server= Artifactory.server 'Artifactory'
             def uploadSpec= """{
                 "files": [{
                 "pattern": "target/*.war",
@@ -61,7 +61,7 @@ node {
    def docker_path="code_repo/docker/"
  dir(docker_path) {
     stage('Download from Jfrog'){
-        def server= Artifactory.server 'Jfrog'
+        def server= Artifactory.server 'Artifactory'
             def downloadSpec = """{
                 "files": [{
                 "pattern": "project-warfile/*.war",
@@ -96,7 +96,7 @@ node {
    def ansible_path="ansible_repo/ansible/"
   dir(ansible_path) {
        stage('Download from Jfrog'){
-        def server= Artifactory.server 'Jfrog'
+        def server= Artifactory.server 'Artifactory'
             def downloadSpec = """{
                 "files": [{
                 "pattern": "project-warfile/*.war",
