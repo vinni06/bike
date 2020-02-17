@@ -15,7 +15,7 @@ node {
   sh 'git clone https://github.com/vinni06/bike.git'
   }
     
- def project_path="code_repo/Bikes/"
+ def project_path="bike/Bikes/"
  
  dir(project_path) {
     
