@@ -58,7 +58,7 @@ node {
   
   
 }
-   def docker_path="code_repo/docker/"
+   def docker_path="bike/docker/"
  dir(docker_path) {
     stage('Download from Jfrog'){
         def server= Artifactory.server 'Artifactory'
@@ -93,7 +93,7 @@ node {
   }
   
   
-   def ansible_path="ansible_repo/ansible/"
+   def ansible_path="ansible-repo/ansible/"
   dir(ansible_path) {
        stage('Download from Jfrog'){
         def server= Artifactory.server 'Artifactory'
@@ -119,7 +119,7 @@ node {
    sh 'git clone https://github.com/vinni06/terraform-repo.git'
   }
 
-def terraform_path="terraform_repo/terraform/"
+def terraform_path="terraform-repo/terraform/"
 dir(terraform_path) {
    stage('Prod Deployment on AWS'){
    sh label: 'terraform', script: '/bin/terraform  init'
