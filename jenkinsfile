@@ -62,9 +62,15 @@ node {
             }"""
         server.download(downloadSpec)
    }
+   
+   
+   
    stage('Docker-Stage-Deployment') {
    sh label: '', script: 'docker-compose up -d --build'
   }
+  
+  
+  
 }
   
     stage('Ansible-Checkout') {
@@ -104,6 +110,11 @@ dir(terraform_path) {
    stage('Prod Deployment on AWS'){
    sh label: 'terraform', script: '/bin/terraform  init'
    sh label: 'terraform', script: '/bin/terraform  apply -input=false -auto-approve'
+   }
+   
+   stage('Ansible configuration')
+   {
+    ansible-playbook  --key=${var.pvt_key} -i jenkins-ci.ini ../../ansible_repo/ansible/web-playbook.yaml -u ubuntu -v
    }
 }
 
