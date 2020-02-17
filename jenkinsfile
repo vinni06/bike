@@ -126,10 +126,7 @@ dir(terraform_path) {
    sh label: 'terraform', script: '/bin/terraform  apply -input=false -auto-approve'
    }
    
-   stage('Ansible configuration')
-   {
-    ansible-playbook  --key=${var.pvt_key} -i jenkins-ci.ini ../../ansible_repo/ansible/web-playbook.yaml -u ubuntu -v
-   }
+
 }
 
 notify('Job Completed')   
