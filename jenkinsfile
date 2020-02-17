@@ -12,7 +12,7 @@ node {
      
   stage('Git-Checkout') {
  
-  sh 'git https://github.com/vinni06/bike.git'
+  git 'https://github.com/vinni06/bike.git'
   }
     
  def project_path="bike/Bikes/"
