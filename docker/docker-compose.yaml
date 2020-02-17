@@ -1,6 +1,7 @@
 version: '2'      
-      services:
-  petclinic:
+services:
+
+  bikes:
     build: . 
     ports:
       - '30080:8080'
